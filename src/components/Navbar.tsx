@@ -27,15 +27,7 @@ export default function Navbar() {
         <NavLink to="/">About</NavLink>
         <NavLink to="/blog">Blog</NavLink>
         <NavLink to="/admin">Admin</NavLink>
-        <a
-          href={site.social.linkedin}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="LinkedIn"
-          className="hidden sm:inline"
-        >
-          in
-        </a>
+
         <DarkModeToggle />
       </div>
     </nav>

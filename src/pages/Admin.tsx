@@ -74,6 +74,10 @@ export default function Admin() {
       </div>
     );
   }
+  const canPublish =
+    title.trim().length > 0 &&
+    slug.trim().length > 0 &&
+    content.trim().length > 0;
 
   return (
     <div>
@@ -112,7 +116,13 @@ export default function Admin() {
         />
         <button
           onClick={savePost}
-          className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+          disabled={!canPublish}
+          className={`px-4 py-2 rounded text-white transition ${
+            canPublish
+              ? "bg-indigo-600 hover:bg-indigo-700"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
+          title={canPublish ? "Publish post" : "Fill title, slug & content"}
         >
           Publish
         </button>
