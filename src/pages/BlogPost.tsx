@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import { supabase } from '../lib/supabaseClient';
-import fallback from '../posts/first-blog.md?raw';
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import { supabase } from "../lib/supabaseClient";
+import fallback from "../posts/first-blog.md?raw";
 
-type Post = { id: string; slug: string; title: string; content: string; published_at: string | null; };
+type Post = {
+  id: string;
+  slug: string;
+  title: string;
+  content: string;
+  published_at: string | null;
+};
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -14,9 +20,9 @@ export default function BlogPost() {
     (async () => {
       if (!slug) return;
       const { data } = await supabase
-        .from('posts')
-        .select('id, slug, title, content, published_at')
-        .eq('slug', slug)
+        .from("posts")
+        .select("id, slug, title, content, published_at")
+        .eq("slug", slug)
         .single();
       if (data) setPost(data);
     })();
@@ -25,7 +31,9 @@ export default function BlogPost() {
   if (!post) {
     return (
       <article className="prose dark:prose-invert">
-        <Link to="/blog" className="no-underline text-sm">← Back to Blog</Link>
+        <Link to="/blog" className="no-underline text-sm">
+          ← Back to Blog
+        </Link>
         <h1>My First Blog (Local)</h1>
         <ReactMarkdown>{fallback}</ReactMarkdown>
       </article>
@@ -34,9 +42,15 @@ export default function BlogPost() {
 
   return (
     <article className="prose dark:prose-invert">
-      <Link to="/blog" className="no-underline text-sm">← Back to Blog</Link>
+      <Link to="/blog" className="no-underline text-sm">
+        ← Back to Blog
+      </Link>
       <h1>{post.title}</h1>
-      {post.published_at && <p><em>{new Date(post.published_at).toDateString()}</em></p>}
+      {post.published_at && (
+        <p>
+          <em>{new Date(post.published_at).toDateString()}</em>
+        </p>
+      )}
       <ReactMarkdown>{post.content}</ReactMarkdown>
     </article>
   );
