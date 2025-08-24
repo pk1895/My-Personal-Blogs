@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { supabase } from "../lib/supabaseClient";
 import fallback from "../posts/first-blog.md?raw";
+import LikeButton from "../components/LikeButton";
+import Comments from "../components/Comments";
 
 type Post = {
   id: string;
@@ -36,6 +38,14 @@ export default function BlogPost() {
         </Link>
         <h1>My First Blog (Local)</h1>
         <ReactMarkdown>{fallback}</ReactMarkdown>
+        {post && (
+          <div className="mt-6 flex items-center gap-3">
+            <LikeButton postId={post.id} />
+          </div>
+        )}
+
+        {/* Comments */}
+        <Comments postId={post ? post.id : ""} />
       </article>
     );
   }

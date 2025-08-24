@@ -4,6 +4,7 @@ import About from "./pages/About";
 import BlogList from "./pages/BlogList";
 import BlogPost from "./pages/BlogPost";
 import Admin from "./pages/Admin";
+import SignIn from "./pages/SignIn";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/signin" element={<SignIn />} />
           </Routes>
         </main>
         <footer className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
